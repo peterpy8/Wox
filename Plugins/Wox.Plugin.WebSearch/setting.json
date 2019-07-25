@@ -121,7 +121,28 @@
     },
     {
       "Title": "Bing",
-      "ActionKeyword": "bing",
+      "ActionKeyword": "web",
+      "IconPath": "Images\\bing.png",
+      "URL": "https://www.bing.com/search?q={q}",
+      "Enabled": true
+    },
+	{
+      "Title": "Bing Map",
+      "ActionKeyword": "map",
+      "IconPath": "Images\\bing.png",
+      "URL": "https://www.bing.com/maps?q={q}",
+      "Enabled": true
+    },
+    {
+      "Title": "Bing Dictionary",
+      "ActionKeyword": "dict",
+      "IconPath": "Images\\bing.png",
+      "URL": "https://www.bing.com/search?q={q}",
+      "Enabled": true
+    },
+    {
+      "Title": "Bing Fact",
+      "ActionKeyword": "fact",
       "IconPath": "Images\\bing.png",
       "URL": "https://www.bing.com/search?q={q}",
       "Enabled": true

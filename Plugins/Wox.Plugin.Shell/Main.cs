@@ -47,6 +47,15 @@ namespace Wox.Plugin.Shell
             }
             else
             {
+                bool runAdmin = false;
+                /*
+                if (cmd.ToLower().StartsWith("sudo") && cmd.Length >= 6)
+                {
+                    cmd = cmd.Substring(5);
+                    runAdmin = true;
+                }
+                */
+
                 var queryCmd = GetCurrentCmd(cmd);
                 results.Add(queryCmd);
                 var history = GetHistoryCmds(cmd, queryCmd);
@@ -83,7 +92,7 @@ namespace Wox.Plugin.Shell
                             IcoPath = Image,
                             Action = c =>
                             {
-                                Execute(m);
+                                Execute(m, runAdmin);
                                 return true;
                             }
                         }));
@@ -162,6 +171,12 @@ namespace Wox.Plugin.Shell
 
         private void Execute(string command, bool runAsAdministrator = false)
         {
+            if (!runAsAdministrator && command.ToLower().StartsWith("sudo"))
+            {
+                runAsAdministrator = true;
+                command = command.Substring(5);
+            }
+
             command = command.Trim();
             command = Environment.ExpandEnvironmentVariables(command);
 
@@ -230,7 +245,7 @@ namespace Wox.Plugin.Shell
             try
             {
                 Process.Start(info);
-                _settings.AddCmdHistory(command);
+                _settings.AddCmdHistory((runAsAdministrator ? "sudo " : "") + command);
             }
             catch (FileNotFoundException e)
             {

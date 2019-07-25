@@ -20,6 +20,38 @@ namespace Wox.Plugin.WebSearch
         {
             new SearchSource
             {
+                Title = "Bing",
+                ActionKeyword = "web",
+                Icon = "bing.png",
+                Url = "https://www.bing.com/search?q={q}",
+                Enabled = true
+            },
+            new SearchSource
+            {
+                Title = "Bing Maps",
+                ActionKeyword = "map",
+                Icon = "bing.png",
+                Url = "https://www.bing.com/maps?q={q}",
+                Enabled = true
+            },
+            new SearchSource
+            {
+                Title = "Bing Dictionary",
+                ActionKeyword = "dict",
+                Icon = "bing.png",
+                Url = "https://www.bing.com/search?q={q}",
+                Enabled = true
+            },
+            new SearchSource
+            {
+                Title = "Bing fact",
+                ActionKeyword = "fact",
+                Icon = "bing.png",
+                Url = "https://www.bing.com/search?q={q}",
+                Enabled = true
+            },
+            new SearchSource
+            {
                 Title = "Google",
                 ActionKeyword = "g",
                 Icon = "google.png",
@@ -64,14 +96,6 @@ namespace Wox.Plugin.WebSearch
                 ActionKeyword = "twitter",
                 Icon = "twitter.png",
                 Url = "https://twitter.com/search?q={q}",
-                Enabled = true
-            },
-            new SearchSource
-            {
-                Title = "Google Maps",
-                ActionKeyword = "maps",
-                Icon = "google_maps.png",
-                Url = "https://maps.google.com/maps?q={q}",
                 Enabled = true
             },
             new SearchSource
@@ -164,14 +188,6 @@ namespace Wox.Plugin.WebSearch
             },
             new SearchSource
             {
-                Title = "Bing",
-                ActionKeyword = "bing",
-                Icon = "bing.png",
-                Url = "https://www.bing.com/search?q={q}",
-                Enabled = true
-            },
-            new SearchSource
-            {
                 Title = "Yahoo",
                 ActionKeyword = "yahoo",
                 Icon = "yahoo.png",
@@ -195,6 +211,10 @@ namespace Wox.Plugin.WebSearch
 
         [JsonIgnore]
         public SuggestionSource[] Suggestions { get; set; } = {
+            new BingWeb(),
+            new BingMap(),
+            new BingDict(),
+            new BingFact(),
             new Google(),
             new Baidu()
         };

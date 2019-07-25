@@ -86,7 +86,7 @@ namespace Wox.Plugin.WebSearch
                 const int waittime = 300;
                 var task = Task.Run(async () =>
                 {
-                    var suggestions = await Suggestions(keyword, subtitle, searchSource);
+                    var suggestions = await Suggestions(keyword, subtitle, searchSource, query.ActionKeyword);
                     results.AddRange(suggestions);
                 }, _updateToken);
 
@@ -101,9 +101,35 @@ namespace Wox.Plugin.WebSearch
             }
         }
 
-        private async Task<IEnumerable<Result>> Suggestions(string keyword, string subtitle, SearchSource searchSource)
+        private async Task<IEnumerable<Result>> Suggestions(string keyword, string subtitle, SearchSource searchSource, string actionKeyword)
         {
-            var source = _settings.SelectedSuggestion;
+            //var source = _settings.SelectedSuggestion;
+
+
+
+            SuggestionSources.SuggestionSource source;
+
+            if (actionKeyword.Equals("web", StringComparison.OrdinalIgnoreCase))
+            {
+                source = _settings.Suggestions[0];
+            }
+            else if (actionKeyword.Equals("map", StringComparison.OrdinalIgnoreCase))
+            {
+                source = _settings.Suggestions[1];
+            }
+            else if (actionKeyword.Equals("dict", StringComparison.OrdinalIgnoreCase))
+            {
+                source = _settings.Suggestions[2];
+            }
+            else if (actionKeyword.Equals("fact", StringComparison.OrdinalIgnoreCase))
+            {
+                source = _settings.Suggestions[3];
+            }
+            else
+            {
+                source = _settings.Suggestions[4];
+            }
+
             if (source != null)
             {
                 var suggestions = await source.Suggestions(keyword);
